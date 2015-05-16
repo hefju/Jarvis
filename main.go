@@ -9,9 +9,14 @@ import ("fmt"
 func main(){
 
     router := gin.Default()
+    router.LoadHTMLGlob("templates/*")
     router.GET("/", func(c *gin.Context) {//测试，获取数据表信息
 //        logger.Debug("visit homepage")
         c.String(http.StatusOK, "Welcome to Jarvis...")
+    })
+    router.GET("/index", func(c *gin.Context) {
+        obj := gin.H{"title": "Main website"}
+        c.HTML(http.StatusOK, "index.html", obj)
     })
 
     router.GET("/today",GetTodayList)
